@@ -138,3 +138,17 @@ def scrape():
     browser.quit()
 
 
+  
+    
+
+    scraped_data = {
+        "news_title": news_title,
+        "news_p": news_p,
+        "featuredimage_url": feature_image_url,
+        "mars_fact_table": mars_facts_html, 
+        "hemisphere_images": hemisphere_image_data
+    }
+
+   
+    return scraped_data
+
