@@ -118,7 +118,7 @@ def scrape():
         base_url = 'https://marshemispheres.com/'
 
         # retrieve the full-resolution image url
-        hem_url = imagesoup.find('img', class_='wide-image')['src']
+        hem_url = imagesoup.find('img', class_="wide-image")['src']
 
         #  creating the full image for the full resolution image
         img_url = base_url + hem_url

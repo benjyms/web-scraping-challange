@@ -17,8 +17,13 @@ mars_data = mongo.db.mars_data
 @app.route("/")
 def home():
 
-    # Return template
-    return render_template("index.html")
+    # Find one record of data from the mongo database
+    mars_data = mongo.db.mars_data.find_one()
+
+    #make auto generated table a bootstrap style table
+    mars_data["mars_fact_table"]=mars_data["mars_fact_table"].replace('<table border="1" class="dataframe">',"<table class='table table-sm'>")
+
+    return render_template("index.html", mission_mars=mars_data)
 
 
 # Route that will trigger the scrape function
@@ -32,17 +37,7 @@ def scrape():
     mars_data.update({}, scraped_data, upsert=True)
 
     # Redirect to the scraped data page
-    return redirect("/data")
-
-# Route to render data.html template using data from Mongo
-@app.route("/data")
-def data():
-
-    # Find one record of data from the mongo database
-    mars_info = mongo.db.mars_data.find_one()
-
-    # Return template and data
-    return render_template("data.html", info=mars_info)
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)
